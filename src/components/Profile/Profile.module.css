@@ -1,0 +1,12 @@
+.item {
+    display: flex;
+}
+
+.item img {
+    width: 300px;
+    height: 200px;
+}
+
+.profile {
+    padding: 10px;
+}
