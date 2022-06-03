@@ -1,4 +1,4 @@
-import * as axios from "axios";
+import axios from "axios";
 
 const instance = axios.create({
     withCredentials: true,
@@ -56,7 +56,7 @@ export const authAPI = {
     me() {
         return instance.get(`auth/me`)
     },
-    login(email: string, password: string, rememberMe = false, captcha = null) {
+    login(email: string, password: string, rememberMe = false, captcha: null | string = null) {
         return instance.post(`auth/login`, { email, password, rememberMe, captcha })
     },
     logout() {
