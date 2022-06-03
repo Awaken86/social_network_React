@@ -11,7 +11,7 @@ import Login from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/Users-Container';
-import { initializeApp } from './redux/app-reducer';
+import { initializeApp } from './redux/app-reducer.ts';
 
 class App extends Component {
     componentDidMount() {

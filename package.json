@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/redux-form": "^8.3.5",
     "axios": "^0.21.4",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
@@ -30,6 +31,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "typescript": "^4.7.2",
     "webpack": "^5.70.0"
   }
 }
