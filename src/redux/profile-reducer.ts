@@ -1,4 +1,5 @@
 import { ProfileAPI, usersAPI } from "../api/api";
+import { PostDataType, ProfileType } from "../types/Types";
 
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
@@ -6,35 +7,6 @@ const SET_STATUS = 'SET_STATUS';
 const SAVE_PHOTO_SUCCES = 'SAVE_PHOTO_SUCCES'
 
 
-type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
-    photos: PhotosType
-
-}
-type PostDataType = {
-    id: number
-    message: string
-    likesCount: number
-    dislikesCount: number
-}
-type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-type PhotosType = {
-    small: string | null
-    large: string | null
-}
 let initialState = {
     PostData: [
         { id: 1, message: 'Ti v myte che', likesCount: 228, dislikesCount: 3 },
