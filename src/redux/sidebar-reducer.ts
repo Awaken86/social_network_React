@@ -1,5 +1,5 @@
 let initialState = {};
-
+type initialState = typeof initialState
 const sidebarReducer = (state = initialState, action: any) => {
 
 

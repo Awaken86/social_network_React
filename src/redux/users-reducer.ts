@@ -20,9 +20,9 @@ let initialState = {
     portionSize: 15
 
 };
-type initialState = typeof initialState
+type InitialState = typeof initialState
 
-const usersReducer = (state = initialState, action: any) => {
+const usersReducer = (state = initialState, action: any): InitialState => {
     switch (action.type) {
         case FOLLOW:
             return {
@@ -78,13 +78,50 @@ const usersReducer = (state = initialState, action: any) => {
             return state;
     }
 }
-export const followSuccess = (userId: number) => ({ type: FOLLOW, userId })
-export const unfollowSuccess = (userId: number) => ({ type: UNFOLLOW, userId })
-export const setUsers = (users: any) => ({ type: SET_USERS, users })
-export const setCurrentPage = (currentPage: number) => ({ type: SET_CURRENT_PAGE, currentPage })
-export const setUsersTotalCount = (totalUsersCount: number) => ({ type: SET_TOTAL_USERS_COUNT, count: totalUsersCount })
-export const setLoader = (isLoading: boolean) => ({ type: TOGGLE_LOADER, isLoading })
-export const toggleFollowingProgress = (isLoading: boolean, userId: number) => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isLoading, userId })
+
+type followSuccessActionType = {
+    type: typeof FOLLOW
+    userId: number
+}
+export const followSuccess = (userId: number): followSuccessActionType => ({ type: FOLLOW, userId })
+
+type unfollowSuccessActionType = {
+    type: typeof UNFOLLOW
+    userId: number
+}
+export const unfollowSuccess = (userId: number): unfollowSuccessActionType => ({ type: UNFOLLOW, userId })
+
+type setUsersActionType = {
+    type: typeof SET_USERS
+    users: Array<UserType>
+}
+export const setUsers = (users: Array<UserType>): setUsersActionType => ({ type: SET_USERS, users })
+
+type setCurrentPageActionType = {
+    type: typeof SET_CURRENT_PAGE
+    currentPage: number
+}
+export const setCurrentPage = (currentPage: number): setCurrentPageActionType => ({ type: SET_CURRENT_PAGE, currentPage })
+
+type setUsersTotalCountActionType = {
+    type: typeof SET_TOTAL_USERS_COUNT
+    count: number
+}
+export const setUsersTotalCount = (totalUsersCount: number): setUsersTotalCountActionType => ({ type: SET_TOTAL_USERS_COUNT, count: totalUsersCount })
+
+type setLoaderActionType = {
+    type: typeof TOGGLE_LOADER
+    isLoading: boolean
+}
+export const setLoader = (isLoading: boolean): setLoaderActionType => ({ type: TOGGLE_LOADER, isLoading })
+
+type toggleFollowingProgressActionType = {
+    type: typeof TOGGLE_IS_FOLLOWING_PROGRESS
+    isLoading: boolean
+    userId: number
+}
+export const toggleFollowingProgress = (isLoading: boolean, userId: number): toggleFollowingProgressActionType => ({ type: TOGGLE_IS_FOLLOWING_PROGRESS, isLoading, userId })
+
 
 export const getUsers = (currentPage: number, pageSize: number) => {
     return async (dispatch: any) => {
