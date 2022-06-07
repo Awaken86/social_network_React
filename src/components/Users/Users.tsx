@@ -1,13 +1,30 @@
 import React, { useState } from "react";
-import s from './Users.module.css';
 import userPhoto from '../../assets/img/user.png';
 import { NavLink } from 'react-router-dom';
+import { UserType } from "../../types/Types";
+//@ts-ignore
+import s from './Users.module.css';
 
-let Users = (props) => {
+
+
+
+type PropsType = {
+    totalItemsCount: number
+    pageSize: number
+    portionSize: number
+    currentPage: number
+    onPageChanged: (pageNumber: number) => void
+    users: Array<UserType>
+    follow: (id: number) => void
+    unfollow: (id: number) => void
+    followingInProgress: Array<number>
+
+}
+let Users: React.FC<PropsType> = (props) => {
 
     let pagesCount = Math.ceil(props.totalItemsCount / props.pageSize);
 
-    let pages = [];
+    let pages: Array<number> = [];
     for (let i = 1; i <= pagesCount; i++) {
         pages.push(i);
     }
@@ -18,7 +35,6 @@ let Users = (props) => {
     let rightPortionPageNumber = (portionNumber) * props.portionSize;
 
     return <div>
-
         <div className={s.scPages}>
             {portionNumber > 1 &&
                 <button onClick={() => { setPortionNumber(portionNumber - 1) }}>Prev</button>}
