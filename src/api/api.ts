@@ -52,12 +52,36 @@ export const ProfileAPI = {
 
 }
 
+export enum ResultCodesEmun {
+    Succes = 0,
+    Error = 1,
+}
+export enum ResultCodesEmunWithCaptcha {
+    CaptchaIsRequired = 10
+}
+type meResponseType = {
+    resultCode: ResultCodesEmun
+    messages: Array<string>
+    data: {
+        id: number
+        email: string
+        login: string
+    }
+}
+type loginResponseType = {
+    resultCode: ResultCodesEmun | ResultCodesEmunWithCaptcha
+    messages: Array<string>,
+    data: {
+        userId: number
+    }
+}
+
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`)
+        return instance.get<meResponseType>(`auth/me`).then(res => res.data)
     },
     login(email: string, password: string, rememberMe = false, captcha: null | string = null) {
-        return instance.post(`auth/login`, { email, password, rememberMe, captcha })
+        return instance.post<loginResponseType>(`auth/login`, { email, password, rememberMe, captcha }).then(res => res.data)
     },
     logout() {
         return instance.delete(`auth/login`)
