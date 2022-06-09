@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import userPhoto from '../../assets/img/user.png';
 import { NavLink } from 'react-router-dom';
 import { UserType } from "../../types/Types";
-//@ts-ignore
 import s from './Users.module.css';
 
 
