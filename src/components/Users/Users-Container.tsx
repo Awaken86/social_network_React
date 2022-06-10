@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, unfollow, setCurrentPage, toggleFollowingProgress, getUsers } from '../../redux/users-reducer';
+import { follow, unfollow, getUsers } from '../../redux/users-reducer';
 import Users from "./Users";
 import Loader from '../common/Loader';
 import { compose } from 'redux';
