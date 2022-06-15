@@ -1,4 +1,5 @@
-import { ProfileAPI, usersAPI } from "../api/api";
+import { profileAPI } from "../api/profile-api";
+import { usersAPI } from "../api/users-api";
 import { PostDataType, ProfileType } from "../types/Types";
 
 const ADD_POST = 'ADD-POST';
@@ -83,27 +84,27 @@ type savePhotoSuccesActionCreatorType = {
 export const savePhotoSucces = (photos: string): savePhotoSuccesActionCreatorType => ({ type: SAVE_PHOTO_SUCCES, photos })
 
 export const getUserProfile = (userId: number) => async (dispatch: any) => { /*санки */
-    let response = await usersAPI.getProfile(userId)
-    dispatch(setUserProfile(response.data));
+    let data = await usersAPI.getProfile(userId)
+    dispatch(setUserProfile(data));
 
 }
 
 export const getStatus = (userId: number) => async (dispatch: any) => { /*санки */
-    let response = await ProfileAPI.getStatus(userId)
+    let response = await profileAPI.getStatus(userId)
     dispatch(setStatus(response.data));
 }
 
 export const updateStatus = (status: string) => async (dispatch: any) => {/*санки */
-    let response = await ProfileAPI.updateStatus(status)
-    if (response.data.resultCode === 0) {
+    let data = await profileAPI.updateStatus(status)
+    if (data.resultCode === 0) {
         dispatch(setStatus(status));
     }
 }
 
 export const savePhoto = (file: any) => async (dispatch: any) => {/*санки */
-    let response = await ProfileAPI.savePhoto(file)
-    if (response.data.resultCode === 0) {
-        dispatch(savePhotoSucces(response.data.data.photos));
+    let data = await profileAPI.savePhoto(file)
+    if (data.resultCode === 0) {
+        dispatch(savePhotoSucces(data.data.photos));
     }
 }
 export default profileReducer;
