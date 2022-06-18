@@ -1,9 +1,8 @@
 import { Dispatch } from 'react';
-import { ThunkAction } from 'redux-thunk';
 import { usersAPI } from '../api/users-api';
 import { UserType } from '../types/Types';
 import { updateObjectInArray } from '../utils/object-helper';
-import { GlobalStateType, InferActionsTypes } from './redux-store';
+import { BaseThunkType, InferActionsTypes } from './redux-store';
 
 
 
@@ -89,7 +88,7 @@ export const actions = {
     toggleFollowingProgress: (isLoading: boolean, userId: number) => ({ type: 'TOGGLE_IS_FOLLOWING_PROGRESS', isLoading, userId } as const)
 }
 
-type ThunkType = ThunkAction<void, GlobalStateType, unknown, ActionsTypes>
+type ThunkType = BaseThunkType<ActionsTypes>
 
 export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
     return async (dispatch) => {

@@ -1,6 +1,10 @@
 import { PhotosType } from "../types/Types";
 import { instance, ApiResponseType } from "./api";
 
+
+type ResponsePhotoDataType = {
+    photos: PhotosType
+}
 export const profileAPI = {
     getProfile(userId: number) {
         return instance.get(`profile/` + userId).then(res => res.data)
@@ -16,7 +20,7 @@ export const profileAPI = {
     savePhoto(filePhoto: any) {
         const formData = new FormData();
         formData.append("image", filePhoto)
-        return instance.put<ApiResponseType<PhotosType>>(`profile/photo`, formData, {
+        return instance.put<ApiResponseType<ResponsePhotoDataType>>(`profile/photo`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
