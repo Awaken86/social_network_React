@@ -1,6 +1,7 @@
 import React from 'react';
+import { PostDataType } from '../../../../types/Types';
 import s from './Post.module.css';
-const Post = (props) => {
+const Post = (props: PostDataType) => {
   return (
 
     <div className={s.item}>

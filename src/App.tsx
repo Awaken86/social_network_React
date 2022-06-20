@@ -11,9 +11,15 @@ import Login from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import UsersContainer from './components/Users/Users-Container';
-import { initializeApp } from './redux/app-reducer.ts';
+import { initializeApp } from './redux/app-reducer';
+import { GlobalStateType } from './redux/redux-store';
 
-class App extends Component {
+type MapPropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+    initializeApp: () => void
+}
+
+class App extends Component<MapPropsType & DispatchPropsType>{
     componentDidMount() {
         this.props.initializeApp();
     }
@@ -42,7 +48,7 @@ class App extends Component {
             </div>)
     }
 }
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: GlobalStateType) => ({
     initialized: state.app.initialized
 })
 export default compose(

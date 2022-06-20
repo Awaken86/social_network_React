@@ -5,8 +5,6 @@ import { UserType } from "../../types/Types";
 import s from './Users.module.css';
 
 
-
-
 type PropsType = {
     totalItemsCount: number
     pageSize: number
