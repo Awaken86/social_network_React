@@ -1,4 +1,5 @@
 import { Dispatch } from 'react';
+import { ApiResponseType, ResultCodesEmun } from '../api/api';
 import { usersAPI } from '../api/users-api';
 import { UserType } from '../types/Types';
 import { updateObjectInArray } from '../utils/object-helper';
@@ -14,9 +15,8 @@ let initialState = {
     isLoading: false,
     followingInProgress: [] as Array<number>, //array of users ids
     portionSize: 15
-
 };
-type InitialState = typeof initialState
+export type InitialState = typeof initialState
 
 
 
@@ -104,22 +104,25 @@ export const getUsers = (currentPage: number, pageSize: number): ThunkType => {
 
 type DispatchType = Dispatch<ActionsTypes>
 
-const _followUnfollow = async (dispatch: DispatchType, userId: number, apiMetod: any, actionCreator: (userId: number) => ActionsTypes) => {
+const _followUnfollow = async (dispatch: DispatchType,
+    userId: number,
+    apiMethod: (userId: number) => Promise<ApiResponseType>,
+    actionCreator: (userId: number) => ActionsTypes) => {
     dispatch(actions.toggleFollowingProgress(true, userId));
-    let response = await apiMetod(userId);
-    if (response.data.resultCode === 0) {
+    let response = await apiMethod(userId);
+    if (response.resultCode === ResultCodesEmun.Succes) {
         dispatch(actionCreator(userId));
     }
     dispatch(actions.toggleFollowingProgress(false, userId));
 }
 export const follow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _followUnfollow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess);
+        await _followUnfollow(dispatch, userId, usersAPI.follow.bind(usersAPI), actions.followSuccess);
     };
 }
 export const unfollow = (userId: number): ThunkType => {
     return async (dispatch) => {
-        _followUnfollow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess);
+        await _followUnfollow(dispatch, userId, usersAPI.unfollow.bind(usersAPI), actions.unfollowSuccess);
     };
 }
 
