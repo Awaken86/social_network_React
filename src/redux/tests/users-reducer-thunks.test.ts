@@ -22,6 +22,7 @@ const result: ApiResponseType = {
 }
 
 usersAPI_Mock.follow.mockReturnValue(Promise.resolve(result))
+
 usersAPI_Mock.unfollow.mockReturnValue(Promise.resolve(result))
 
 test("follow thunk", async () => {

@@ -1,6 +1,6 @@
-import usersReducer, { actions, InitialState } from "../users-reducer"
+import usersReducer, { actions, InitialStateType } from "../users-reducer"
 
-let state: InitialState;
+let state: InitialStateType;
 
 beforeEach(() => {
     state = {
@@ -25,7 +25,7 @@ beforeEach(() => {
                 follower: true,
                 status: 'status 2',
                 photos: { large: null, small: null }
-            },{
+            }, {
                 id: 3,
                 name: 'user 3',
                 follower: true,
@@ -38,7 +38,10 @@ beforeEach(() => {
         currentPage: 1,
         isLoading: false,
         followingInProgress: [],
-        portionSize: 15
+        portionSize: 15,
+        filter: {
+            term: ''
+        }
     }
 })
 

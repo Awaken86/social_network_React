@@ -75,8 +75,8 @@ export const getUserProfile = (userId: number): ThunkType => async (dispatch) =>
 
 }
 export const getStatus = (userId: number): ThunkType => async (dispatch) => { /*санки */
-    let response = await profileAPI.getStatus(userId)
-    dispatch(actions.setStatus(response.data));
+    let data = await profileAPI.getStatus(userId)
+    dispatch(actions.setStatus(data));
 }
 export const updateStatus = (status: string): ThunkType => async (dispatch) => {/*санки */
     let data = await profileAPI.updateStatus(status)

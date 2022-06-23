@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { follow, unfollow, getUsers } from '../../redux/users-reducer';
+import { follow, unfollow, getUsers, FilterType } from '../../redux/users-reducer';
 import Users from "./Users";
 import Loader from '../common/Loader';
 import { compose } from 'redux';
-import { getCurrentPage, getFollowingInProgress, getIsLoading, getPageSize, getPortionSize, getResectUsers, getTotalUsersCount } from '../../redux/users-selector';
+import { getCurrentPage, getFollowingInProgress, getIsLoading, getPageSize, getPortionSize, getResectUsers, getTotalUsersCount, getUsersFilter } from '../../redux/users-selector';
 import { UserType } from '../../types/Types';
 import { GlobalStateType } from '../../redux/redux-store';
 
@@ -16,11 +16,12 @@ type mapStateToPropsType = {
     isLoading: boolean
     followingInProgress: Array<number>
     portionSize: number
+    filter: FilterType
 }
 type mapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    getUsers: (currentPage: number, pageSize: number) => void
+    getUsers: (currentPage: number, pageSize: number, term: string) => void
 
 }
 type OwnPropsType = {
@@ -30,14 +31,18 @@ type PropsType = mapStateToPropsType & mapDispatchToPropsType
 
 class UsersContainer extends React.Component<PropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        const { currentPage, pageSize } = this.props
+        this.props.getUsers(currentPage, pageSize, '');
     }
 
 
     onPageChanged = (pageNumber: number) => {
-
-        this.props.getUsers(pageNumber, this.props.pageSize);
-
+        const { pageSize, filter } = this.props
+        this.props.getUsers(pageNumber, pageSize, filter.term);
+    }
+    onFilterChanged = (filter: FilterType) => {
+        const { pageSize } = this.props
+        this.props.getUsers(1, pageSize, filter.term);
     }
 
 
@@ -54,6 +59,7 @@ class UsersContainer extends React.Component<PropsType> {
                 follow={this.props.follow}
                 followingInProgress={this.props.followingInProgress}
                 portionSize={this.props.portionSize}
+                onFilterChanged={this.onFilterChanged}
             />
         </div>
     }
@@ -77,7 +83,8 @@ let mapStateToProps = (state: GlobalStateType): mapStateToPropsType => {
         currentPage: getCurrentPage(state),
         isLoading: getIsLoading(state),
         followingInProgress: getFollowingInProgress(state),
-        portionSize: getPortionSize(state)
+        portionSize: getPortionSize(state),
+        filter: getUsersFilter(state)
     }
 }
 
