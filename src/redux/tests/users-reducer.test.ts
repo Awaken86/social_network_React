@@ -40,7 +40,8 @@ beforeEach(() => {
         followingInProgress: [],
         portionSize: 15,
         filter: {
-            term: ''
+            term: '',
+            friend: null
         }
     }
 })

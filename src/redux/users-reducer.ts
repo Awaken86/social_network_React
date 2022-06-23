@@ -16,7 +16,8 @@ let initialState = {
     followingInProgress: [] as Array<number>, //array of users ids
     portionSize: 15,
     filter: {
-        term: ''
+        term: '',
+        friend: null as null | boolean
     }
 };
 export type InitialStateType = typeof initialState
@@ -95,17 +96,17 @@ export const actions = {
     setUsersTotalCount: (totalUsersCount: number) => ({ type: 'SN/USERS/SET_TOTAL_USERS_COUNT', count: totalUsersCount } as const),
     setLoader: (isLoading: boolean) => ({ type: 'SN/USERS/TOGGLE_LOADER', isLoading } as const),
     toggleFollowingProgress: (isLoading: boolean, userId: number) => ({ type: 'SN/USERS/TOGGLE_IS_FOLLOWING_PROGRESS', isLoading, userId } as const),
-    SetFilter: (term: string) => ({ type: 'SN/USERS/SET_FILTER', payload: { term } } as const),
+    SetFilter: (filter: FilterType) => ({ type: 'SN/USERS/SET_FILTER', payload: filter } as const),
 }
 
 type ThunkType = BaseThunkType<ActionsTypes>
 
-export const getUsers = (currentPage: number, pageSize: number, term: string): ThunkType => {
+export const getUsers = (currentPage: number, pageSize: number, filter: FilterType): ThunkType => {
     return async (dispatch) => {
         dispatch(actions.setLoader(true));
         dispatch(actions.setCurrentPage(currentPage))
-        dispatch(actions.SetFilter(term))
-        let data = await usersAPI.getUsers(currentPage, pageSize, term)
+        dispatch(actions.SetFilter(filter))
+        let data = await usersAPI.getUsers(currentPage, pageSize, filter.term, filter.friend)
         dispatch(actions.setLoader(false));
         dispatch(actions.setUsers(data.items));
         dispatch(actions.setUsersTotalCount(data.totalCount));
