@@ -7,10 +7,10 @@ import './App.css';
 import Loader from './components/common/Loader';
 import DialogsContainer from './components/Dialogs/DialogsContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
-import Login from './components/Login/Login';
+import { Login } from './components/Login/Login';
 import Navbar from './components/Navbar/Navbar';
 import ProfileContainer from './components/Profile/ProfileContainer';
-import UsersContainer from './components/Users/Users-Container';
+import { UsersPage } from './components/Users/Users-Container';
 import { initializeApp } from './redux/app-reducer';
 import { GlobalStateType } from './redux/redux-store';
 
@@ -32,16 +32,12 @@ class App extends Component<MapPropsType & DispatchPropsType>{
                 <HeaderContainer />
                 <Navbar />
                 <div className='app-wrapper-content'>
-
                     <Route path='/dialogs'
                         render={() => <DialogsContainer />} />
-
                     <Route path='/profile/:userId?'
                         render={() => <ProfileContainer />} />
-
                     <Route path='/users'
-                        render={() => <UsersContainer />} />
-
+                        render={() => <UsersPage />} />
                     <Route path='/login'
                         render={() => <Login />} />
                 </div>

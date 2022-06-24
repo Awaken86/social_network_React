@@ -14,7 +14,7 @@ type messagesType = {
 type ActionsTypes = InferActionsTypes<typeof actions>
 let initialState = {
     dialogsData: [
-        { id: 1, name: 'Dima(xyesos)' },
+        { id: 1, name: 'Dima(clown)' },
         { id: 2, name: 'Down' },
         { id: 3, name: 'clownada' },
         { id: 4, name: 'lexa ' }

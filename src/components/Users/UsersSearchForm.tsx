@@ -11,8 +11,10 @@ type UsersSearchFormPropsType = {
 }
 type FormType = {
     term: string,
-    friend: "null" | "true" | "false"
+    friend: string
 }
+
+
 export const UsersSearchForm: React.FC<UsersSearchFormPropsType> = React.memo((props) => {
     const submit = (values: FormType, { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }) => {
         const filter: FilterType = {
@@ -21,15 +23,13 @@ export const UsersSearchForm: React.FC<UsersSearchFormPropsType> = React.memo((p
         }
         props.onFilterChanged(filter)
         setSubmitting(false)
-    };
+    }
     return (
-        //@ts-ignor
         <div>
             <h1>Anywhere in your app!</h1>
             <Formik
                 initialValues={{ term: '', friend: "null" }}
                 validate={UsersSearchFormValidate}
-                //@ts-ignore
                 onSubmit={submit}
             >
                 {({ isSubmitting }) => (
