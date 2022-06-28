@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import userPhoto from '../../assets/img/user.png';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import s from './Users.module.css';
 import { UsersSearchForm } from "./UsersSearchForm";
 import { UsersPaginator } from "./usersPaginator";
 import { FilterType, getUsers } from "../../redux/users-reducer";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentPage, getFollowingInProgress, getPageSize, getPortionSize, getResectUsers, getTotalUsersCount, getUsersFilter } from "../../redux/users-selector";
-
+import queryString from 'query-string';
 
 type PropsType = {
 
@@ -15,7 +15,8 @@ type PropsType = {
 }
 export const Users: React.FC<PropsType> = (props) => {
 
-
+    const dispatch = useDispatch()
+    const history = useHistory()
 
     const users = useSelector(getResectUsers)
     const totalUsersCount = useSelector(getTotalUsersCount)
@@ -25,11 +26,25 @@ export const Users: React.FC<PropsType> = (props) => {
     const followingInProgress = useSelector(getFollowingInProgress)
     const portionSize = useSelector(getPortionSize)
 
+
     useEffect(() => {
-        dispatch(getUsers(currentPage, pageSize, filter));
+        const parsed = queryString.parse(history.location.search)
+        let actualPage = currentPage
+        let actualFilter = filter
+        if (!!parsed.page) actualPage = Number(parsed.page)
+        if (!!parsed.term) actualFilter = { ...actualFilter, term: parsed.term as string }
+        if (!!parsed.friend) actualFilter = { ...actualFilter, friend: parsed.friend === 'null' ? null : parsed.friend === 'true' ? true : false }
+        dispatch(getUsers(actualPage, pageSize, actualFilter))
+        debugger
     }, [])
 
-    const dispatch = useDispatch()
+    useEffect(() => {
+        history.push({
+            pathname: '/users',
+            search: `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
+        })
+    }, [filter, currentPage])
+
 
     const onPageChanged = (pageNumber: number) => {
         dispatch(getUsers(pageNumber, pageSize, filter))
