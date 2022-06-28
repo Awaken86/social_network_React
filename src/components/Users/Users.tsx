@@ -10,8 +10,11 @@ import { getCurrentPage, getFollowingInProgress, getPageSize, getPortionSize, ge
 import queryString from 'query-string';
 
 type PropsType = {
-
-
+}
+type queryParamsType = {
+    term?: string
+    page?: string
+    friend?: string
 }
 export const Users: React.FC<PropsType> = (props) => {
 
@@ -35,13 +38,16 @@ export const Users: React.FC<PropsType> = (props) => {
         if (!!parsed.term) actualFilter = { ...actualFilter, term: parsed.term as string }
         if (!!parsed.friend) actualFilter = { ...actualFilter, friend: parsed.friend === 'null' ? null : parsed.friend === 'true' ? true : false }
         dispatch(getUsers(actualPage, pageSize, actualFilter))
-        debugger
     }, [])
 
     useEffect(() => {
+        const queryParams: queryParamsType = {}
+        if (!!filter.term) queryParams.term = filter.term
+        if (filter.friend !== null) queryParams.friend = String(filter.friend)
+        if (currentPage !== 1) queryParams.page = String(currentPage)
         history.push({
             pathname: '/users',
-            search: `?term=${filter.term}&friend=${filter.friend}&page=${currentPage}`
+            search: queryString.stringify(queryParams)
         })
     }, [filter, currentPage])
 
