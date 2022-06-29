@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { WrappedFieldMetaProps, WrappedFieldProps } from 'redux-form';
 import s from './FormsControls.module.css';
 
 type FormControlParamsType = {
     meta: WrappedFieldMetaProps
+    children: ReactNode
 }
 
 

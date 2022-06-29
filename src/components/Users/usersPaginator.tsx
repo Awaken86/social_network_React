@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import s from './Users.module.css';
 type PropsType = {
     totalUsersCount: number
@@ -6,6 +6,7 @@ type PropsType = {
     portionSize: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
+    children: ReactNode
 }
 export const UsersPaginator: React.FC<PropsType> = (props) => {
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);

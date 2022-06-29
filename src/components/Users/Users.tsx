@@ -10,6 +10,7 @@ import { getCurrentPage, getFollowingInProgress, getPageSize, getPortionSize, ge
 import queryString from 'query-string';
 
 type PropsType = {
+
 }
 type queryParamsType = {
     term?: string
@@ -46,7 +47,7 @@ export const Users: React.FC<PropsType> = (props) => {
         if (filter.friend !== null) queryParams.friend = String(filter.friend)
         if (currentPage !== 1) queryParams.page = String(currentPage)
         history.push({
-            pathname: '/users',
+            pathname: '/developers',
             search: queryString.stringify(queryParams)
         })
     }, [filter, currentPage])
@@ -65,50 +66,51 @@ export const Users: React.FC<PropsType> = (props) => {
         dispatch(unfollow(userId))
     }
 
-    return <div>
-        <UsersPaginator
-            totalUsersCount={totalUsersCount}
-            pageSize={pageSize}
-            portionSize={portionSize}
-            currentPage={currentPage}
-            onPageChanged={onPageChanged}>
-        </UsersPaginator>
+    return (
+        <>
+            <UsersPaginator
+                totalUsersCount={totalUsersCount}
+                pageSize={pageSize}
+                portionSize={portionSize}
+                currentPage={currentPage}
+                onPageChanged={onPageChanged}>
+            </UsersPaginator>
 
-        <div>All Users</div>
-        <UsersSearchForm onFilterChanged={onFilterChanged} />
-        {
-            users.map(u => <div key={u.id}>
-                <span>
-                    <div>
-                        <NavLink to={`/profile/${u.id}`}>
-                            <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="" className={s.userImg} />
-                        </NavLink>
-                    </div>
-                    <div>
-                        {u.follower
-                            ? <button disabled={followingInProgress
-                                .some(id => id === u.id)}
-                                onClick={() => { unfollow(u.id) }}>
-                                unfollow
-                            </button>
-                            : <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
-                                follow(u.id);
-                            }}>follow
-                            </button>
-                        }
-                    </div>
-                </span>
-                <span>
+            <div>All Users</div>
+            <UsersSearchForm onFilterChanged={onFilterChanged} />
+            {
+                users.map(u => <div key={u.id}>
                     <span>
-                        <div>{u.name}</div>
-                        <div>{u.status}</div>
+                        <div>
+                            <NavLink to={`/profile/${u.id}`}>
+                                <img src={u.photos.small != null ? u.photos.small : userPhoto} alt="" className={s.userImg} />
+                            </NavLink>
+                        </div>
+                        <div>
+                            {u.follower
+                                ? <button disabled={followingInProgress
+                                    .some(id => id === u.id)}
+                                    onClick={() => { unfollow(u.id) }}>
+                                    unfollow
+                                </button>
+                                : <button disabled={followingInProgress.some(id => id === u.id)} onClick={() => {
+                                    follow(u.id);
+                                }}>follow
+                                </button>
+                            }
+                        </div>
                     </span>
                     <span>
-                        <div>{/*u.Location.country*/}</div>
-                        <div>{/*u.Location.city*/}</div>
+                        <span>
+                            <div>{u.name}</div>
+                            <div>{u.status}</div>
+                        </span>
+                        <span>
+                            <div>{/*u.Location.country*/}</div>
+                            <div>{/*u.Location.city*/}</div>
+                        </span>
                     </span>
-                </span>
-            </div>)
-        }
-    </div>
+                </div>)
+            }
+        </>)
 }
