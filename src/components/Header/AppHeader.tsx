@@ -37,7 +37,10 @@ const AppHeader: React.FC<AppHeaderProps> = (props) => {
                             <Button onClick={logoutCallback}>Log out</Button>
                         </Col>
                     </>
-                    : <Link to={'/login'}>Login</Link>}
+                    :
+                    <Col span={5}>
+                        <Button><Link to={'/login'}>Login</Link></Button>
+                    </Col>}
             </Row>
         </Header>
     )
