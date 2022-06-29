@@ -19,6 +19,7 @@ const AppHeader: React.FC<AppHeaderProps> = (props) => {
     const logoutCallback = () => {
         dispatch(logout())
     }
+    
     return (
         <Header className="header">
             <div className="logo" />
