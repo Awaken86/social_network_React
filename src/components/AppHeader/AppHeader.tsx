@@ -1,8 +1,10 @@
 import { Avatar, Button, Col, Layout, Menu, Row } from 'antd';
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import s from './Header.module.css';
 import { UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
+import { GlobalStateType } from '../../redux/redux-store';
 import { logout } from '../../redux/auth-reducer';
 import { getIsAuth, getLogin } from '../../redux/auth-selector';
 const { Header } = Layout;
@@ -44,12 +46,5 @@ const AppHeader: React.FC<AppHeaderProps> = (props) => {
         </Header>
     )
 }
-// <header className={s.header}>
-//     <img alt='' src='https://i.pinimg.com/736x/22/17/be/2217be4d416facec25af63f829958405.jpg' />
-//     <div className={s.loginBlock}>
-//         {props.isAuth
-//             ? <div>{props.login} - <button onClick={props.logout}>Log out</button> </div>
-//             : <NavLink to={'/login'}>Login</NavLink>}
-//     </div>
-// </header>
+
 export default AppHeader;
