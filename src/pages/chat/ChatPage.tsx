@@ -23,9 +23,11 @@ const Chat: React.FC = () => {
 }
 const Messages: React.FC = () => {
     const [messages, sendMessages] = useState<Array<ChatMessageType>>([])
+
     useEffect(() => {
-        ws.addEventListener('message', (e) => {
-            sendMessages([...messages, JSON.parse(e.data)])
+        ws.addEventListener('message', (e: MessageEvent) => {
+            let newMessages = JSON.parse(e.data)
+            sendMessages((prevMessages) => [...prevMessages, ...newMessages])
         })
     }, [])
     return (
@@ -45,13 +47,21 @@ const Message: React.FC<{ message: ChatMessageType }> = ({ message }) => {
     );
 }
 const AddMessageForm: React.FC = () => {
+    const [message, setMessage] = useState('')
+    const sendMessage = () => {
+        if (!message) {
+            return
+        }
+        ws.send(message)
+        setMessage('')
+    }
     return (
         <div>
             <div>
-                <textarea ></textarea>
+                <textarea onChange={(e) => setMessage(e.currentTarget.value)} value={message}></textarea>
             </div>
             <div>
-                <button>send</button>
+                <button onClick={sendMessage}>send</button>
             </div>
         </div>
     );
