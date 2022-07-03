@@ -6,7 +6,7 @@ import { Input } from "../common/FormsControls/FormsControls";
 import { login } from '../../redux/auth-reducer'
 import { Redirect } from "react-router-dom";
 import style from '../common/FormsControls/FormsControls.module.css'
-import { GlobalStateType } from "../../redux/redux-store";
+import { GlobalStateType } from "../../redux/store-redux";
 
 type LoginReduxFormValuesType = {
     email: string, password: string, rememberMe: boolean, captcha: string

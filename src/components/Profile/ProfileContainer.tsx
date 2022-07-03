@@ -4,7 +4,7 @@ import Profile from './Profile';
 import { getUserProfile, getStatus, updateStatus, savePhoto } from '../../redux/profile-reducer'
 import { withRouter } from 'react-router';
 import { compose } from 'redux';
-import { GlobalStateType } from '../../redux/redux-store';
+import { GlobalStateType } from '../../redux/store-redux';
 import { RouteComponentProps } from 'react-router-dom';
 
 type mapPropsType = ReturnType<typeof mapStateToProps>

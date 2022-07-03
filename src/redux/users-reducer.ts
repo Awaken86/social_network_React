@@ -3,7 +3,7 @@ import { ApiResponseType, ResultCodesEmun } from '../api/api';
 import { usersAPI } from '../api/users-api';
 import { UserType } from '../types/Types';
 import { updateObjectInArray } from '../utils/object-helper';
-import { BaseThunkType, InferActionsTypes } from './redux-store';
+import { BaseThunkType, InferActionsTypes } from './store-redux';
 
 
 

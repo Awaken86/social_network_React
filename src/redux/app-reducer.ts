@@ -1,5 +1,5 @@
 import { getAuthUserData } from "./auth-reducer";
-import { BaseThunkType, InferActionsTypes } from "./redux-store";
+import { BaseThunkType, InferActionsTypes } from "./store-redux";
 
 
 let initialState = {

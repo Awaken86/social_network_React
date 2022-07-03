@@ -3,7 +3,7 @@ import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 import { compose } from 'redux';
-import { GlobalStateType } from "../../redux/redux-store";
+import { GlobalStateType } from "../../redux/store-redux";
 import React from "react";
 
 

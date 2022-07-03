@@ -13,7 +13,7 @@ export const usersAPI = {
         return instance.delete<ApiResponseType>(`follow/${userId}`).then(res => res.data)
     },
     getProfile(userId: number) {
-        /*кароч пример совместимости со старыми версиями*/
+        /*пример совместимости со старыми версиями*/
         return profileAPI.getProfile(userId).then(res => res)
     }
 

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { actions } from '../../../redux/profile-reducer';
-import { GlobalStateType } from '../../../redux/redux-store';
+import { GlobalStateType } from '../../../redux/store-redux';
 import MyPost, { dispatchPropsType, mapPropsType } from './MyPost';
 
 let mapStateToProps = (state: GlobalStateType) => {

@@ -2,7 +2,7 @@ import { FormAction, stopSubmit } from "redux-form";
 import { ResultCodesEmun, ResultCodesForCaptcha } from "../api/api";
 import { authAPI } from "../api/auth-api";
 import { securityAPI } from "../api/security-api";
-import { BaseThunkType, InferActionsTypes } from "./redux-store";
+import { BaseThunkType, InferActionsTypes } from "./store-redux";
 
 let initialState = {
     userId: null as number | null,

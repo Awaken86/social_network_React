@@ -1,4 +1,4 @@
-import { GlobalStateType } from "./redux-store";
+import { GlobalStateType } from "./store-redux";
 
 export const getLogin = (state: GlobalStateType) => {
     return state.auth.login;

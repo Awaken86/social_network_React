@@ -1,7 +1,7 @@
 import { profileAPI } from "../api/profile-api";
 import { usersAPI } from "../api/users-api";
 import { PhotosType, PostDataType, ProfileType } from "../types/Types";
-import { BaseThunkType, InferActionsTypes } from "./redux-store";
+import { BaseThunkType, InferActionsTypes } from "./store-redux";
 
 
 

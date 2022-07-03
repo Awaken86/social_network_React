@@ -1,6 +1,6 @@
 import { createSelector } from "reselect"
 import { UserType } from "../types/Types";
-import { GlobalStateType } from "./redux-store";
+import { GlobalStateType } from "./store-redux";
 
 export const getSelectorUsers = (state: GlobalStateType) => {
     return state.usersPage.users;
