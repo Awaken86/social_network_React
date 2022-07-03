@@ -16,12 +16,6 @@ const chatReducer = (state = initialState, action: ActionsTypes): initialStateTy
                 ...state,
                 messages: [...state.messages, ...action.payload.messages]
             }
-        case 'SN/auth/GET_CAPTCHA_URL_SUCCESS':
-            return {
-                ...state,
-                ...action.payload
-            }
-
         default:
             return state;
     }
@@ -31,14 +25,11 @@ const chatReducer = (state = initialState, action: ActionsTypes): initialStateTy
 export const actions = {
     messagesReceived: (messages: Array<ChatMessageType>) => ({
         type: 'SN/chat/MESSAGES_RECEIVED', payload: { messages }
-    } as const),
-    getCaptchaUrlSuccess: (captchaUrl: string) => ({
-        type: 'SN/auth/GET_CAPTCHA_URL_SUCCESS', payload: { captchaUrl }
     } as const)
 }
 let _newMessageHandler: ((messages: ChatMessageType[]) => void) | null = null
 
-const newMessageHandlerCreator = (dispatch: Dispatch) => (messages: ChatMessageType[]) => {
+const newMessageHandlerCreator = (dispatch: Dispatch) =>  {
     if (_newMessageHandler === null) {
         _newMessageHandler = (messages) => {
             dispatch(actions.messagesReceived(messages))
@@ -55,7 +46,6 @@ export const stopMessagesListening = (): ThunkType => async (dispatch) => {
     ChatApi.unSubscribe(newMessageHandlerCreator(dispatch))
     ChatApi.stop()
 }
-
 export const sendMessage = (message: string) => async () => {
     ChatApi.sendMessage(message)
 }

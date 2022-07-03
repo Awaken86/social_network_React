@@ -9,7 +9,6 @@ const closeHandler = () => {
 const messageHandler = (e: MessageEvent) => {
     const newMessages = JSON.parse(e.data)
     subscribers.forEach(s => s(newMessages))
-    debugger
 }
 
 function createWSChannel() {
