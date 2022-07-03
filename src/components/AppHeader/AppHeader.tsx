@@ -1,10 +1,8 @@
 import { Avatar, Button, Col, Layout, Menu, Row } from 'antd';
 import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import s from './Header.module.css';
+import { Link } from 'react-router-dom';
 import { UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { GlobalStateType } from '../../redux/redux-store';
 import { logout } from '../../redux/auth-reducer';
 import { getIsAuth, getLogin } from '../../redux/auth-selector';
 const { Header } = Layout;

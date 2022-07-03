@@ -11,8 +11,8 @@ import { initializeApp } from './redux/app-reducer'
 import { GlobalStateType } from './redux/redux-store'
 import { LaptopOutlined, NotificationOutlined, UserOutlined } from '@ant-design/icons'
 import { Layout, Menu, Breadcrumb } from 'antd'
-import AppHeader from './components/Header/AppHeader'
 import { withSuspense } from './hoc/withSuspense'
+import AppHeader from './components/AppHeader/AppHeader'
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
 const ChatPage = React.lazy(() => import('./pages/chat/ChatPage'))
