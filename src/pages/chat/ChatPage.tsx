@@ -40,7 +40,7 @@ const Messages: React.FC = () => {
     }
     useEffect(() => {
         if (autoScroll === true) {
-            messagesRef.current?.scrollIntoView({ behavior: 'smooth' })
+            messagesRef.current?.scrollIntoView({ block: 'end', behavior: 'smooth' })
         }
     }, [messages])
     return (
