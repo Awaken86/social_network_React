@@ -16,7 +16,7 @@ const AddNewPostForm: React.FC<InjectedFormProps<addPostFormValuesType, AddNewPo
         <div>
             <form onSubmit={props.handleSubmit}>
                 <Field name="newPostText" component={Textarea} validate={[required, maxlegth10]} />
-                <button>Say хуйню</button>
+                <button>Send post</button>
             </form>
         </div>)
 }
