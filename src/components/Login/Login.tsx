@@ -43,9 +43,7 @@ const LoginForm: React.FC<InjectedFormProps<LoginReduxFormValuesType, LoginFormO
     )
 }
 
-const LoginReduxForm = reduxForm<LoginReduxFormValuesType, LoginFormOwnPropsType>({
-    form: 'login'
-})(LoginForm)
+const LoginReduxForm = reduxForm<LoginReduxFormValuesType, LoginFormOwnPropsType>({ form: 'login' })(LoginForm)
 
 export const Login: React.FC = () => {
     const captchaUrl = useSelector((state: GlobalStateType) => state.auth.captchaUrl)
@@ -55,10 +53,12 @@ export const Login: React.FC = () => {
         dispatch(login(formData.email, formData.password, formData.rememberMe, formData.captcha))
     }
     if (isAuth) {
-        return <Redirect to={"profile"} />
+        return <Redirect to={"/profile"} />
     }
-    return <div>
-        <h1>login</h1>
-        <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
-    </div>
+    return (
+        <div>
+            <h1>login</h1>
+            <LoginReduxForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
+        </div>
+    )
 }
